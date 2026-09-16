@@ -1,50 +1,56 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: 0.0.0 → 1.0.0
+- Modified principles: N/A (new governance document)
+- Added sections: Additional Constraints, Development Workflow
+- Removed sections: N/A
+- Deferred items: TODO(RATIFICATION_DATE): confirm the original adoption date for this constitution.
+-->
+
+# ContosoDashboard Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Security-by-Design for Training
+ContosoDashboard MUST be developed as a safe training environment, not a production system. All user-facing features, authentication behavior, and data access must preserve user isolation, restrict access by role, and avoid exposing production-grade secrets, external dependencies, or unsafe defaults.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+This rule is non-negotiable because the repository is explicitly a learning project. If a feature introduces a security boundary or user-scoped data path, the implementation must enforce authorization at the service layer and the UI boundary before it is considered complete.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. User-Centered Workflow Integrity
+Every task, project, and notification flow MUST align with the real user journey for a dashboard application: clear visibility, consistent status transitions, role-relevant actions, and explicit ownership of work.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+The project exists to teach disciplined product behavior, so each feature must be understandable to a learner and traceable to a business outcome. Any screen or service that changes task state, project membership, or user visibility must keep the workflow coherent and auditable.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Test-First Verification
+No feature, fix, or behavior change is complete until the relevant validation has been executed and the evidence is recorded in the working branch. For user-facing behavior or security-sensitive changes, a failing check or targeted repro MUST exist before implementation, followed by a passing validation after the fix.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+This principle prevents speculative changes and keeps the repository aligned with Spec-Driven Development. When a change cannot be verified by existing tests or a targeted validation step, it is considered incomplete.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Data Integrity and Access Boundaries
+The data model MUST preserve ownership, membership, and task constraints. Services MUST reject unauthorized reads or writes, prevent insecure direct object references, and enforce the same rules whether data is accessed through a page, component, or API-like service call.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+The rationale is straightforward: a dashboard that appears to work but allows cross-user access is not acceptable. Data boundaries are part of the product contract and must be treated as mandatory behavior, not optional checks.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Simplicity, Clarity, and Maintainability
+The solution MUST favor small, clear abstractions, explicit naming, and straightforward service boundaries over broad frameworks or hidden logic. Features must remain understandable to students and maintainers without requiring deep knowledge of incidental implementation details.
+
+Complexity is allowed only when it is required by the problem and is documented. The default posture is simplicity: keep code obvious, local, and easy to verify.
+
+## Additional Constraints
+ContosoDashboard is a training-focused application that MUST remain offline-first, local-only, and intentionally limited to educational scenarios. The project MUST use the existing ASP.NET Core and Blazor Server patterns unless a deliberate governance change is approved.
+
+The repository MUST not present itself as production-ready infrastructure. Authentication, data storage, and deployment assumptions must remain clearly labeled as mock or training-oriented. Any cloud migration path must be described as an explicit future step, not a silent requirement.
+
+## Development Workflow
+All work MUST begin from a clearly defined requirement or specification. Changes to behavior, security rules, or user workflows MUST be reflected in the relevant spec artifacts before implementation proceeds.
+
+Reviews MUST confirm that requirements are met, security boundaries remain intact, and validation evidence is present. Pull requests that alter task logic, permissions, or project access must explicitly explain the impact on users and the verification performed.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution supersedes informal project practices and governs design, implementation, review, and change management for ContosoDashboard. All contributors and reviewers MUST operate under these principles unless a formal amendment is approved.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Amendments MUST be documented in writing, include the rationale for the change, and identify the impacted principles or workflows. Major changes to required security behavior, role boundaries, or project scope require explicit review and approval before they are adopted. Minor wording or clarification updates may be approved with narrower review if they do not change the underlying obligations.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Compliance review is required before merge for any change that affects security, authorization, architecture, or training scope. The review must confirm that the change aligns with the constitution and that the relevant validation evidence exists. Repeated non-compliance is treated as a governance issue and must be addressed through corrective action, not by over-riding the written policy.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): confirm the original adoption date for this constitution. | **Last Amended**: 2026-09-16
