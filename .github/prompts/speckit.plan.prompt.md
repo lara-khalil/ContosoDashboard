@@ -1,3 +1,4 @@
+
 ---
 agent: speckit.plan
 ---
